@@ -1,0 +1,8 @@
+# phpstan.neon
+parameters:
+    level: 5 # Or your desired level, 0-9
+    paths:
+        - src
+        - tests
+    excludes_analyse:
+        - %rootDir%/public/
