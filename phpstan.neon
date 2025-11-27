@@ -1,8 +1,9 @@
-# phpstan.neon
+includes:
+    - vendor/bitexpert/phpstan-magento/extension.neon # Include the Magento extension config
+
 parameters:
-    level: 5 # Or your desired level, 0-9
+    level: 5 # Start with a lower level (e.g., 5) and increase gradually
     paths:
-        - src
-        - tests
-    excludes_analyse:
-        - %rootDir%/public/
+        - app/code # Analyze your custom modules
+	excludePaths:
+		- app/code/Magedelight/*
