@@ -55,6 +55,7 @@
         "magento/magento-coding-standard": "^38.0",
         "magento/magento2-functional-testing-framework": "^5.0",
         "pdepend/pdepend": "3.x-dev",
+        "pheromone/phpcs-security-audit": "^2.0",
         "phpmd/phpmd": "3.x-dev",
         "phpstan/extension-installer": "^1.4",
         "phpstan/phpstan": "^1.9",
