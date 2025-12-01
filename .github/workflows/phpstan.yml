@@ -1,0 +1,35 @@
+name: PHPStan for Magento 2
+
+on: [push, pull_request]
+
+jobs:
+  phpstan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: actions/checkout@v4
+        with:
+          php-version: '8.2' # Match your Magento version's required PHP
+          extensions: mbstring, pdo_sqlite, xml, bcmath, soap, intl # Common Magento extensions
+          coverage: none
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --no-progress --prefer-dist
+
+      # --- PHP_CodeSniffer (PHPCS) Setup & Run ---
+      # Add the Magento coding standard to your project first:
+      # composer require --dev magento/magento-coding-standard
+      - name: Run PHP_CodeSniffer (PHPCS)
+        run: ./vendor/bin/phpcs --standard=Magento2 app/code/ 
+     # Adjust path/standard
+
+      - name: Run PHPCS Security audit
+        run: ./vendor/bin/phpcs --extensions=php --standard=./vendor/pheromone/phpcs-security-audit/example_base_ruleset.xml app/code/
+        
+      - name: Run PHPStan
+        # Command to run PHPStan using your configuration file
+        run: ./vendor/bin/phpstan analyse --configuration phpstan.neon
